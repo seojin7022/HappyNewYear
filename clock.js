@@ -1,11 +1,17 @@
 const body = document.body;
 const clock = body.querySelector("#clock");
+const title = body.querySelector("#title");
+
 
 function getTime() {
-    const date = new Date();
+    if (new Date().getMonth() === 1 && new Date().getDate() === 1) {
+        clock.classList.add("hidden");
+        title.innerHTML = "Happy New Year"
+    } else {
+        const date = new Date();
     let year = date.getFullYear();
 
-    if (date.getMonth() >= 1 && date.getDay() >= 1) {
+    if (date.getMonth() >= 1 && date.getDate() >= 1) {
         year = year + 1;
     }
 
@@ -18,7 +24,13 @@ function getTime() {
     const sec = String(Math.floor(gap % (1000 * 60) / (1000))).padStart(2, "0");
     
     clock.innerHTML = `${day}일 ${hour}시간 ${min}분 ${sec}초`;
+    }
+    
 }
+
+
 
 getTime();
 setInterval(getTime, 1000);
+
+
